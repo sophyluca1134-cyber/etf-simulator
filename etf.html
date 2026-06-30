@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>カバードコールETF 分配金シミュレーター</title>
+    <meta name="theme-color" content="#0f3d3e" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+    <link rel="stylesheet" href="etf-styles.css?v=4" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="summary-band" aria-label="income summary">
+        <div>
+          <p class="eyebrow">Covered Call ETF Income Simulator</p>
+          <h1>分配金と保有資産をすぐ確認</h1>
+          <p class="switch-link"><a href="/">家計簿を開く</a></p>
+        </div>
+        <div class="summary-grid">
+          <div class="metric">
+            <span>月間見込み（税引後）</span>
+            <strong id="monthlyIncome">0</strong>
+          </div>
+          <div class="metric">
+            <span>年間見込み（税引後）</span>
+            <strong id="annualIncome">0</strong>
+          </div>
+          <div class="metric">
+            <span>評価額</span>
+            <strong id="marketValue">0</strong>
+          </div>
+          <div class="metric">
+            <span>簿価利回り（税引後）</span>
+            <strong id="yieldOnCost">0.00%</strong>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <aside class="panel controls-panel">
+          <div class="panel-header">
+            <h2>入力</h2>
+            <button class="icon-button" id="resetButton" type="button" title="reset" aria-label="reset">&#8634;</button>
+          </div>
+
+          <form id="holdingForm" class="form-stack">
+            <label>
+              USD/JPY
+              <input id="fxInput" type="number" min="0" step="0.01" inputmode="decimal" />
+            </label>
+            <div class="fx-tools">
+              <button id="refreshFxButton" type="button">USD/JPY更新</button>
+              <span id="fxStatus" class="fx-status">自動取得待ち</span>
+            </div>
+
+            <label>
+              銘柄
+              <select id="tickerSelect"></select>
+            </label>
+
+            <label>
+              保有口数
+              <input id="unitsInput" type="number" min="0" step="1" inputmode="numeric" required />
+            </label>
+
+            <label>
+              平均取得単価
+              <input id="costInput" type="number" min="0" step="0.01" inputmode="decimal" />
+            </label>
+
+            <label>
+              メモ
+              <input id="noteInput" type="text" maxlength="40" placeholder="NISA / 特定口座" />
+            </label>
+
+            <button class="primary-button" type="submit">保有に追加・更新</button>
+          </form>
+
+          <div class="button-row">
+            <button id="exportButton" type="button">CSV書き出し</button>
+            <label class="file-button">
+              CSV読み込み
+              <input id="importInput" type="file" accept=".csv,text/csv" />
+            </label>
+          </div>
+        </aside>
+
+        <section class="main-area">
+          <div class="panel">
+            <div class="panel-header">
+              <h2>保有資産</h2>
+              <span id="savedStatus" class="status-pill">保存済み</span>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>銘柄</th>
+                    <th>口数</th>
+                    <th>評価額</th>
+                    <th>月間</th>
+                    <th>年間</th>
+                    <th>利回り</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="holdingsBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-header">
+              <h2>銘柄データ</h2>
+              <div class="panel-actions">
+                <button id="refreshFundsButton" type="button">市場データ更新</button>
+                <button id="addFundButton" type="button">銘柄追加</button>
+              </div>
+            </div>
+            <p id="fundDataStatus" class="data-status">自動取得待ち</p>
+            <div class="fund-grid" id="fundGrid"></div>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <template id="fundCardTemplate">
+      <article class="fund-card">
+        <div class="fund-card-top">
+          <input class="ticker-input" aria-label="ticker" />
+          <button class="delete-fund icon-button" type="button" title="delete" aria-label="delete">&times;</button>
+        </div>
+        <label>
+          銘柄名
+          <input class="name-input" type="text" />
+        </label>
+        <div class="two-col">
+          <label>
+            現在価格
+            <input class="price-input" type="number" min="0" step="0.01" inputmode="decimal" />
+          </label>
+          <label>
+            直近分配金
+            <input class="distribution-input" type="number" min="0" step="0.0001" inputmode="decimal" />
+          </label>
+        </div>
+        <div class="yearly-distributions"></div>
+        <label>
+          通貨
+          <select class="currency-input">
+            <option value="JPY">JPY</option>
+            <option value="USD">USD</option>
+          </select>
+        </label>
+        <p class="fund-stats"></p>
+      </article>
+    </template>
+
+    <script src="etf-app.js?v=4"></script>
+  </body>
+</html>
