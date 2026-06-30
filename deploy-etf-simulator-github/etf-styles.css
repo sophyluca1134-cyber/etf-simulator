@@ -1,0 +1,373 @@
+:root {
+  color-scheme: light;
+  --bg: #f5f7f4;
+  --ink: #1a1f1b;
+  --muted: #667067;
+  --line: #d9dfd7;
+  --panel: #ffffff;
+  --accent: #0f766e;
+  --accent-dark: #115e59;
+  --gold: #b7791f;
+  --soft: #e8f3ef;
+  --danger: #b42318;
+  font-family: "Yu Gothic", "Meiryo", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+button, input, select { font: inherit; }
+
+button {
+  border: 1px solid var(--line);
+  background: #fff;
+  border-radius: 8px;
+  color: var(--ink);
+  cursor: pointer;
+  min-height: 42px;
+  padding: 0 14px;
+}
+
+button:hover, .file-button:hover { border-color: var(--accent); }
+
+.app-shell {
+  width: min(1220px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 28px 0;
+}
+
+.summary-band {
+  background: linear-gradient(135deg, #0f3d3e, #176b5f 62%, #d9a441);
+  border-radius: 8px;
+  color: #fff;
+  display: grid;
+  gap: 28px;
+  grid-template-columns: 1fr 1.5fr;
+  min-height: 190px;
+  padding: 30px;
+}
+
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0;
+  margin: 0 0 10px;
+  opacity: 0.78;
+  text-transform: uppercase;
+}
+
+h1, h2 { margin: 0; }
+
+h1 {
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.08;
+}
+
+h2 { font-size: 18px; }
+
+.switch-link { margin: 14px 0 0; }
+.switch-link a { color: #fff; text-underline-offset: 4px; }
+
+.summary-grid {
+  align-self: end;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.metric {
+  background: rgba(255, 255, 255, 0.13);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  min-width: 0;
+  padding: 16px;
+}
+
+.metric span {
+  display: block;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+.metric strong {
+  display: block;
+  font-size: clamp(17px, 1.6vw, 23px);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.15;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+.workspace {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: 320px minmax(0, 1fr);
+  margin-top: 18px;
+}
+
+.workspace > * { min-width: 0; }
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  min-width: 0;
+  padding: 18px;
+}
+
+.controls-panel {
+  align-self: start;
+  position: sticky;
+  top: 16px;
+}
+
+.panel-header, .fund-card-top, .button-row {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.panel-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.panel-actions button {
+  font-size: 13px;
+  min-height: 36px;
+  padding: 0 12px;
+}
+
+.main-area {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.form-stack, .fund-card {
+  display: grid;
+  gap: 14px;
+}
+
+label {
+  color: var(--muted);
+  display: grid;
+  font-size: 13px;
+  gap: 7px;
+}
+
+input, select {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  min-height: 42px;
+  padding: 8px 10px;
+  width: 100%;
+}
+
+input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input:focus, select:focus {
+  border-color: var(--accent);
+  outline: 3px solid rgba(15, 118, 110, 0.16);
+}
+
+.primary-button {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 700;
+}
+
+.primary-button:hover { background: var(--accent-dark); }
+
+.icon-button {
+  align-items: center;
+  display: inline-flex;
+  font-size: 22px;
+  justify-content: center;
+  padding: 0;
+  width: 42px;
+}
+
+.file-button {
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--ink);
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 14px;
+  justify-content: center;
+  min-height: 42px;
+  padding: 0 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.file-button input { display: none; }
+
+.button-row { margin-top: 14px; }
+.button-row > * { flex: 1; }
+
+.fx-tools {
+  align-items: center;
+  display: grid;
+  gap: 8px;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.fx-tools button {
+  font-size: 13px;
+  min-height: 36px;
+  padding: 0 12px;
+}
+
+.fx-status, .data-status {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.data-status { margin: 8px 0 14px; }
+
+.status-pill {
+  background: var(--soft);
+  border-radius: 999px;
+  color: var(--accent-dark);
+  font-size: 12px;
+  padding: 5px 10px;
+}
+
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 760px;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid var(--line);
+  padding: 13px 8px;
+  text-align: right;
+  white-space: nowrap;
+}
+
+th:first-child, td:first-child { text-align: left; }
+
+th {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.jpy-subvalue, .tax-subvalue {
+  color: var(--muted);
+  display: inline-block;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+.tax-subvalue { font-size: 11px; }
+
+.empty-row td {
+  color: var(--muted);
+  padding: 32px 8px;
+  text-align: center;
+}
+
+.fund-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fund-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px;
+}
+
+.ticker-input {
+  color: var(--accent-dark);
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.two-col {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fund-stats {
+  background: var(--soft);
+  border-radius: 8px;
+  color: var(--accent-dark);
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0;
+  padding: 10px;
+}
+
+.yearly-distributions { min-height: 28px; }
+
+.distribution-history-label {
+  color: var(--muted);
+  display: grid;
+  font-size: 12px;
+  gap: 6px;
+}
+
+.distribution-history-select {
+  font-size: 13px;
+  min-height: 38px;
+}
+
+.distribution-empty {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.delete-row, .delete-fund { color: var(--danger); }
+
+@media (max-width: 920px) {
+  .summary-band, .workspace { grid-template-columns: 1fr; }
+  .summary-grid, .fund-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .controls-panel { position: static; }
+}
+
+@media (max-width: 560px) {
+  .app-shell {
+    width: min(100% - 20px, 1220px);
+    padding: 10px 0;
+  }
+
+  .summary-band { padding: 20px; }
+  .metric strong { font-size: clamp(17px, 6vw, 23px); }
+  .summary-grid, .fund-grid, .two-col { grid-template-columns: 1fr; }
+}
